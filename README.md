@@ -70,3 +70,12 @@ Backlog event t1=21;event t2=30
 And watch the relay turn on and off based on the values.
 
 Please note that this example does not support manual override or handle missing sensor data. Take a look at Thermostat Example for examples.
+
+
+---
+
+```
+Rules2 on button1#state=1 do power1 1 enddo; on button1#state=0 do power1 0 enddo
+```
+
+* EventEventName - when command ```Event eventName``` is executed. You can define your own event values and trigger them with the ```Event``` command. An event with a ```=``` will provide a ```%value%``` to use in the execution part of the rule. Example: Command ```Event speed=2``` in rule trigger ```on event#speed``` will have the ```%value%``` of ```2```.
