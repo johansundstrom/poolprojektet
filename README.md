@@ -53,6 +53,17 @@ rule1
 rule1 1
 ```
 
+```
+on DS18B20-1#temperature do event t1=%value% endon
+on DS18B20-2#temperature do event t2=%value% endon
+on event#t2>%mem3% do var1 1; endon
+on event#t2<=%mem3% do var1 0; endon
+on event#t1 do backlog var2 %value%; add2 1; endon
+on event#t1 do backlog var3 %value%; add3 2; endon
+on event#t2>%var3% do power1 %var1%; endon
+on event#t2<%var2% do power1 0; endon
+```
+
 To test the rule without having the sensors in place, simply enter the events for t1 and t2 in the console:
 Backlog event t1=21;event t2=30
 
