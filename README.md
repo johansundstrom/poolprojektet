@@ -5,8 +5,9 @@ Pool med filter pump och solfångare. Vid sol ska pumpen trycka vatten genom sol
 3 rules:
 
 * Pumpen ska starta när solfångaren är mer än 2 grader varmare än pooltemperaturen
-* Pumpn ska stoppa när solfångaren är mindre än 1 grad varmare än pooltemperaturen
+* Pumpen ska stoppa när solfångaren är mindre än 1 grad varmare än pooltemperaturen
 * Pumpen ska inte starta om solfångaren är under 25 grader.
+
 
 * t1: aktuell temperatur på poolvattnet
 * t2: aktuell temperatur i solfångaren
