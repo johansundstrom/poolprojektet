@@ -8,12 +8,12 @@ Pool med filter pump och solfångare. Vid sol ska pumpen trycka vatten genom sol
 * Pumpn ska stoppa när solfångaren är mindre än 1 grad varmare än pooltemperaturen
 * Pumpen ska inte starta om solfångaren är under 25 grader.
 
-t1: aktuell temperatur på poolvattnet
-t2: aktuell temperatur i solfångaren
-var1: in valid panel temp range?
-var2: off threshold temp for panel
-var3: on threshold temp for panel
-mem3: lägsta möjliga solfångartemp
+* t1: aktuell temperatur på poolvattnet
+* t2: aktuell temperatur i solfångaren
+* var1: in valid panel temp range?
+* var2: off threshold temp for panel
+* var3: on threshold temp for panel
+* mem3: lägsta möjliga solfångartemp
 
 ```
 mem3 25
