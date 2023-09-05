@@ -1,18 +1,18 @@
 # POOLPROJEKTET
 
-Pool med filter pump och solfångare. Vid sol ska pumpen trycka vatten genom solfångaren för uppvärmning. Vid natt eller kallare temperatur ska pumpen vara av för att hindra avkylning. Pumpen är ansluten till Sonoff TH10 och 2x DS18B20 sensorer finns.
+Pool med filter pump och solfångare. Vid sol ska pumpen trycka vatten genom solfångaren för uppvärmning. Vid natt eller kallare temperatur ska pumpen vara av för att hindra avkylning. Pumpen är ansluten till Sonoff TH10 och 2 st. DS18B20.
 
 3 rules:
 
-* Pumpen ska starta när solfångaren är mer än 2 grader varmare än pooltemperaturen
-* Pumpen ska stoppa när solfångaren är mindre än 1 grad varmare än pooltemperaturen
+* Pumpen ska starta när solfångartemp (t1) är 2 grader varmare än pooltemperaturen (t2)
+* Pumpen ska stoppa när solfångartemp är mindre än 1 grad varmare än pooltemperaturen
 * Pumpen ska inte starta om solfångaren är under 25 grader.
 
 ### Variabler
 
-* t1: aktuell temperatur på poolvattnet
-* t2: aktuell temperatur i solfångaren
-* var1: in valid panel temp range?
+* t1: aktuell pooltemperatur
+* t2: aktuell solfångartemp
+* var1: solfångartemp inom giltig tempområde?
 * var2: off threshold temp for panel
 * var3: on threshold temp for panel
 * mem3: lägsta möjliga solfångartemp
@@ -53,12 +53,25 @@ rule1
 rule1 1
 ```
 
+
 ```
 on DS18B20-1#temperature do event t1=%value% endon
 on DS18B20-2#temperature do event t2=%value% endon
-on event#t2>%mem3% do var1 1; endon
-on event#t2<=%mem3% do var1 0; endon
-on event#t1 do backlog var2 %value%; add2 1; endon
+```
+
+Om solfångartemp > lägsta starttemp, sätt var1 1
+
+```on event#t2>%mem3% do var1 1; endon```
+
+Om solfångartemp <= mintemp, sätt var1 0
+
+```on event#t2<=%mem3% do var1 0; endon```
+
+Låt var2 = pooltemp + 2
+
+```on event#t1 do backlog var2 %value%; add2 1; endon```
+
+
 on event#t1 do backlog var3 %value%; add3 2; endon
 on event#t2>%var3% do power1 %var1%; endon
 on event#t2<%var2% do power1 0; endon
