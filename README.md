@@ -1,6 +1,6 @@
 # POOLPROJEKTET
 
-Pool med filter pump och solfångare. Vid sol ska pumpen trycka vatten genom solfångaren för uppvärmning. Vid natt eller kallare temperatur ska pumpen vara av för att hindra avkylning. Pumpen är ansluten till Sonoff TH10 och 2 st. DS18B20.
+Pool med filterpump och solfångare. Vid sol ska pumpen trycka vatten genom solfångaren för uppvärmning. Vid natt eller kallare temperatur ska pumpen stoppas för att hindra avkylning. Pumpen är ansluten till Sonoff TH10 och 2 st. DS18B20.
 
 3 rules:
 
