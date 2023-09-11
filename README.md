@@ -87,7 +87,8 @@ Please note that this example does not support manual override or handle missing
 
 ---
 
-```mem3 25
+```
+mem3 25
 rule1 
 on DS18B20-1#temperature do event t1=%value% endon
 on DS18B20-2#temperature do event t2=%value% endon
