@@ -54,22 +54,11 @@ rule1 1
 ```
 
 
-```
-on DS18B20-1#temperature do event t1=%value% endon
-on DS18B20-2#temperature do event t2=%value% endon
-```
-
-Om solfångartemp > lägsta starttemp, sätt var1 1
-
-```on event#t2>%mem3% do var1 1; endon```
-
-Om solfångartemp <= mintemp, sätt var1 0
-
-```on event#t2<=%mem3% do var1 0; endon```
-
-Låt var2 = pooltemp + 2
-
-```on event#t1 do backlog var2 %value%; add2 1; endon```
+```on DS18B20-1#temperature do event t1=%value% endon``` <- Skapa event
+```on DS18B20-2#temperature do event t2=%value% endon``` <- rep
+```on event#t2>%mem3% do var1 1; endon``` <- Om solfångartemp > lägsta starttemp, sätt var1 1
+```on event#t2<=%mem3% do var1 0; endon``` <- Om solfångartemp <= mintemp, sätt var1 0
+```on event#t1 do backlog var2 %value%; add2 1; endon``` <- Låt var2 = pooltemp + 2
 
 
 ```
