@@ -13,8 +13,8 @@ Pool med filterpump och solfångare. Vid sol ska pumpen trycka vatten genom solf
 * t1: aktuell pooltemperatur
 * t2: aktuell solfångartemp
 * var1: solfångartemp inom giltig tempområde?
-* var2: off threshold temp for panel
-* var3: on threshold temp for panel
+* var2: off-gränsvärdestemp för solfångartemp
+* var3: on-gränsvärdestemp för solfångartemp
 * mem3: lägsta möjliga solfångartemp
 
 ```
@@ -53,11 +53,11 @@ rule1
 rule1 1
 ```
 
-
-* ```on DS18B20-1#temperature do event t1=%value% endon``` <- Skapa event
-* ```on DS18B20-2#temperature do event t2=%value% endon``` <- rep
-* ```on event#t2>%mem3% do var1 1; endon``` <- Om solfångartemp > lägsta starttemp, sätt var1 1
-* ```on event#t2<=%mem3% do var1 0; endon``` <- Om solfångartemp <= mintemp, sätt var1 0
+* ```mem 3``` <- Ange lägsta möjliga solfångartemp
+* ```on DS18B20-1#temperature do event t1=%value% endon``` <- Skapa event för t1
+* ```on DS18B20-2#temperature do event t2=%value% endon``` <- Skapa event för t2
+* ```on event#t2>%mem3% do var1 1; endon``` <- Om solfångartemp > lägsta solfångartemp, sätt var1 1 (pump på)
+* ```on event#t2<=%mem3% do var1 0; endon``` <- Om solfångartemp <= mintemp, sätt var1 0 (pump av)
 * ```on event#t1 do backlog var2 %value%; add2 1; endon``` <- var2 = pooltemp + 2
 * ```on event#t1 do backlog var3 %value%; add3 2; endon``` <- var3 = pooltemp + 3
 * ```on event#t2>%var3% do power1 %var1%; endon``` <- starta pump om solfångartemp > pooltemp
@@ -66,13 +66,14 @@ rule1 1
 ---
 
 För att testa reglerna utan inkopplade sensorer, sätt t1 and t2 i console:
+
 ```Backlog event t1=21;event t2=30```
 
-And watch the relay turn on and off based on the values.
-
-Please note that this example does not support manual override or handle missing sensor data. Take a look at Thermostat Example for examples.
+Avlär reläerna för de aktuella temperaturerna
 
 ---
+
+Koden
 
 ```
 mem3 25
