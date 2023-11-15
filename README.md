@@ -76,7 +76,7 @@ För att testa reglerna utan inkopplade sensorer, sätt t1 and t2 i console:
 
 ```Backlog event t1=21;event t2=30```
 
-Avlär reläerna för de aktuella temperaturerna
+Avläs reläerna för de aktuella temperaturerna
 
 ---
 
@@ -101,4 +101,5 @@ on event#t2<%var2% do power1 0; endon
 Rules2 on button1#state=1 do power1 1 enddo; on button1#state=0 do power1 0 enddo
 ```
 
-* EventEventName - when command ```Event eventName``` is executed. You can define your own event values and trigger them with the ```Event``` command. An event with a ```=``` will provide a ```%value%``` to use in the execution part of the rule. Example: Command ```Event speed=2``` in rule trigger ```on event#speed``` will have the ```%value%``` of ```2```.
+* Event EventName - Med ```Event eventName``` kan man definiera events och trigga dessa. Ett event med ```=``` tilldelar ett ```%value%``` som del av regeln.
+* Exampel: Regeln ```Event speed=2``` kan triggas ```on event#speed``` och ```%value%``` ```2```.
